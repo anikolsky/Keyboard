@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     }
-                    val color = viewModel.color.collectAsStateWithLifecycle().value
+                    val color = viewModel.color.collectAsStateWithLifecycle()
 
                     NavHost(
                         navController = navController,
@@ -57,7 +57,7 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(route = Screens.Settings.route) {
                             SettingsScreen(
-                                color = Color(color),
+                                color = Color(color.value),
                                 onEvent = viewModel::onEvent
                             )
                         }

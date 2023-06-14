@@ -36,21 +36,10 @@ class KeyboardService :
 
     override fun onKey(primaryCode: Int, keyCodes: IntArray?) {
         val inputConnection = currentInputConnection
-        if (inputConnection != null) {
+        inputConnection?.let {
             when (primaryCode) {
-                Keyboard.KEYCODE_DELETE -> {
-                    onDeleteClick()
-                }
-
-                Keyboard.KEYCODE_SHIFT -> {
-                    onShiftClick()
-                }
-//                Keyboard.KEYCODE_DONE -> inputConnection.sendKeyEvent(
-//                    KeyEvent(
-//                        KeyEvent.ACTION_DOWN,
-//                        KeyEvent.KEYCODE_ENTER
-//                    )
-//                )
+                Keyboard.KEYCODE_DELETE -> onDeleteClick()
+                Keyboard.KEYCODE_SHIFT -> onShiftClick()
                 else -> {
                     var code = primaryCode.toChar()
                     if (Character.isLetter(code) && caps) {
@@ -68,7 +57,7 @@ class KeyboardService :
 
     private fun onDeleteClick() {
         val inputConnection = currentInputConnection
-        if (inputConnection != null) {
+        inputConnection?.let {
             val selectedText = inputConnection.getSelectedText(0)
             if (selectedText.isNullOrEmpty()) {
                 inputConnection.deleteSurroundingText(1, 0)

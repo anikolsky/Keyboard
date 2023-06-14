@@ -18,7 +18,7 @@ class SettingsStorage(private val context: Context) {
     }
 
     val keyboardColor: Flow<Long> = context.dataStore.data
-        .map { it[KEYBOARD_COLOR] ?: 0L }
+        .map { it[KEYBOARD_COLOR] ?: 0xFF32C0D5 }
 
     suspend fun setKeyboardColor(color: Long) {
         context.dataStore.edit { it[KEYBOARD_COLOR] = color }
